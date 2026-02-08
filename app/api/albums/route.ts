@@ -1,5 +1,5 @@
-export const dynamic = "force-dynamic";
-export const runtime = "nodejs";
+// export const dynamic = "force-dynamic";
+// export const runtime = "nodejs";
 import prisma from "@/lib/prisma";
 // "@/un_chemin/etc"    => alias path, souvent @ = dossier racine du projet
 

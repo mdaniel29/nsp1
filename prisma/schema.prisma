@@ -1,20 +1,14 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client"
   output   = "../app/generated/prisma"
 }
 
 datasource db {
-  provider  = "postgresql"
+  provider = "postgresql"
 }
 
 model album {
-  id     Int  @id(map: "idx_18608_primary") @default(autoincrement())
+  id     BigInt  @id(map: "idx_46381_primary") @default(autoincrement())
   title  String  @db.VarChar(191)
   artist String  @db.VarChar(191)
   cover  String  @db.VarChar(191)
@@ -22,11 +16,11 @@ model album {
 }
 
 model track {
-  id       Int @id(map: "idx_18615_primary") @default(autoincrement())
+  id       BigInt @id(map: "idx_46388_primary") @default(autoincrement())
   title    String @db.VarChar(191)
-  duration Int
-  albumid  Int
+  duration BigInt
+  albumid  BigInt
   album    album  @relation(fields: [albumid], references: [id])
 
-  @@index([albumid], map: "idx_18615_track_albumid_fkey")
+  @@index([albumid], map: "idx_46388_track_albumid_fkey")
 }

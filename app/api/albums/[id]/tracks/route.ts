@@ -1,24 +1,32 @@
-export const dynamic = "force-dynamic";
-export const runtime = "nodejs";
 import prisma from "@/lib/prisma";
-//import { getPrisma } from "@/lib/prisma";
 import { NextResponse } from "next/server";
 
-export async function GET(req: Request, {params}: {params: Promise<{id : string}>}) {
+export type Context = {
+  params: { id: string }
+}
+
+export async function GET(req: Request, {params}: {params: {id : string}}) {
+//export async function GET(req: Request, { params }: Context) {
   const {id} = await params
-  //const prisma = await getPrisma();
+  console.log("**************************** id : ", id);
 
   try {
     const tracks = await prisma.track.findMany({
-      //where: { albumId: Number(params.id) },
-      where: { albumid: Number(id) },
+      where: { albumid: BigInt(id) },
     });
-    return NextResponse.json(tracks);
+    
+    const safeTracks = tracks.map((item) => ({
+      ...item, id: Number(item.id), duration: Number(item.duration), albumid: Number(item.albumid) 
+    }));
+    // modif du typage BigInt => int en utilisant l'opérateur de Cast Number() pour chaque proriété de type BigInt,
+    // sinon problème avec json stringify - Destructuration et update de l'objet tracks 
+    
+    return NextResponse.json(safeTracks);
   }
   catch (err) {
     console.log("Erreur albums/[id]/tracks/route.ts, err : ", err)
-    //return null;
-    return NextResponse.redirect('http://127.0.0.1:3000/albums'); // TODO: mettre du process.env
+    return NextResponse.redirect('http://127.0.0.1:3000/albums'); // TODO: mettre en process.env
   }
 }
 
+// TODO: implémenter function POST

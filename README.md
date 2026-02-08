@@ -12,3 +12,22 @@ Exercise from A Web fullStack development course (Front + Next API with Prisma a
 
 **Next : Docker in vps integration !**
 
+
+## Ennoncé de l'exercice
+
+L'énnoncé de départ se trouve dans le projet deezer29.  
+Il s'agit ici dun fork de ce micro-projet de départ, qui prend en compte la nouvelle version de Prisma : V7,  
+ainsi que l'abandon des intéractions avec Supabase et le déploiement Vercel.  
+
+- **Next.JS : Front + Back avec sa propre API**
+- **Base de donnée : PostgresSQL**
+
+**08/02/2026**
+## En prévision :
+
+- déploiement sur un vps HostArmada
+- conteneurisation docker, accessible au travers d'un reverse-proxy
+- Rendre opérationnelle la fonction de recherche.
+- Implémentation des requêtes POST pour pouvoir ajouter de nouvelles données (Albums, pistes, images,...)
+
+
