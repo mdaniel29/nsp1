@@ -1,23 +1,24 @@
-//export const dynamic = "force-dynamic";
-//export const runtime = "nodejs";
 import prisma from "@/lib/prisma";
-//import { getPrisma } from "@/lib/prisma";
 import TracksList from "./TracksList"
+
 
 export default async function AlbumPage({ params }: { params: { id: string } }) {
     //const prisma= await getPrisma();
-    const { id } = await params;
+    const { id } = await params ?? 1;
     const album = await prisma.album.findUnique({
         where: { id: Number(id) },
     });
 
     if (!album) return <div>Album introuvable</div>;
-
+    const safeAlbum = {...album, id: Number(id)}; // conversion Bigint => int
+    console.log("album id : ",album.id);    // DEBUG
+    console.log("safeAlbum id : ",safeAlbum.id); // DEBUG
+    
     return (
         <div>
             <h1 className="text-2xl font-bold">{album.title}</h1>
             <p className="text-gray-500">{album.artist}</p>
-            <TracksList albumId={album.id} />
+            <TracksList albumId={safeAlbum.id} />
         </div>
     );
 }
