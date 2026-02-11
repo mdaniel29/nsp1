@@ -30,4 +30,5 @@ ainsi que l'abandon des intéractions avec Supabase et le déploiement Vercel.
 - Rendre opérationnelle la fonction de recherche.
 - Implémentation des requêtes POST pour pouvoir ajouter de nouvelles données (Albums, pistes, images,...)
 
-
+**11-02-2026**
+# DEV BRANCH
