@@ -19,18 +19,26 @@ export default async function AlbumsPage() {
         return image;
     }
 
-    const albums = await prisma.album.findMany();
-    return (
-        <div>
-            <h1 className="text-2xl mb-4">Albums</h1>
-            <ul className="">
-                {albums && albums.map((a: Prisma.albumModel) => (
-                    <li key={a.id} className="m-2 mb-3">
-                        <a href={`/albums/${a.id}`} className="hover:underline text-blue-700 mb-2">{a.title} — {a.artist}</a>
-                        {a.id && <RenderImage key={a.id} urlImg={"/images/"+a.cover} />}
-                    </li>
-                ))}
-            </ul>
-        </div>
-    );
+    if (process.env.NODE_ENV === 'development' && !process.env.CI) {
+        // En phase de build, retourne des données mockées
+        return { albums: { albums: [{ id: 1, title: "titre", artiste: "artist", cover: "cover" }] } };
+    }
+    else {
+
+        const albums = await prisma.album.findMany();
+
+        return (
+            <div>
+                <h1 className="text-2xl mb-4">Albums</h1>
+                <ul className="">
+                    {albums && albums.map((a: Prisma.albumModel) => (
+                        <li key={a.id} className="m-2 mb-3">
+                            <a href={`/albums/${a.id}`} className="hover:underline text-blue-700 mb-2">{a.title} — {a.artist}</a>
+                            {a.id && <RenderImage key={a.id} urlImg={"/images/" + a.cover} />}
+                        </li>
+                    ))}
+                </ul>
+            </div>
+        );
+    }
 }
