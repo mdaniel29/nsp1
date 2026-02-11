@@ -1,8 +1,5 @@
-// export const dynamic = "force-dynamic";
-// export const runtime = "nodejs";
-//import { getPrisma } from "@/lib/prisma";
+
 import RenderImage from "./RenderImage";
-import { AlbumType } from "../types";
 import prisma from "@/lib/prisma";
 import { Prisma } from "../generated/prisma/client";
 
@@ -21,7 +18,15 @@ export default async function AlbumsPage() {
 
     if (process.env.NODE_ENV === 'development' && !process.env.CI) {
         // En phase de build, retourne des données mockées
-        return { albums: { albums: [{ id: 1, title: "titre", artiste: "artist", cover: "cover" }] } };
+        console.log("Mock")
+        const albums = [{ id: 1, title: "titre", artiste: "artist", cover: "cover" }]
+        return (
+        <div>
+            {albums.map((elem,idx) => (
+                <p>{`Element ${idx+1} : ${elem.artiste}`}</p>
+            ))}
+              </div>
+              );
     }
     else {
 
