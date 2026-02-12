@@ -3,10 +3,26 @@ import RenderImage from "./RenderImage";
 import prisma from "@/lib/prisma";
 import { Prisma } from "../generated/prisma/client";
 
+export async function getServerSideProps() {
+  // En développement, retourne des données mockées
+  if (process.env.NODE_ENV === 'development' && !process.env.CI) {
+    return {
+      props: {
+        albums: [{ id: 1, title: "titre", artiste: "artist", cover: "cover" }],
+      },
+    };
+  }
+
+  // En production, récupère les données depuis la base
+  const albums = await prisma.album.findMany();
+  return {
+    props: {
+      albums: JSON.parse(JSON.stringify(albums)), // Convertit les BigInt en nombres
+    },
+  };
+}
 
 export default async function AlbumsPage() {
-
-    //const prisma = await getPrisma();
 
     async function getImage(albumId: number): Promise<string> {
         const albumImg = await prisma.album.findFirst({ where: { id: albumId }, select: { cover: true } })
@@ -16,22 +32,7 @@ export default async function AlbumsPage() {
         return image;
     }
 
-    if (process.env.NODE_ENV === 'development' && !process.env.CI) {
-        // En phase de build, retourne des données mockées
-        console.log("Mock")
-        const albums = [{ id: 1, title: "titre", artiste: "artist", cover: "cover" }]
-        return (
-        <div>
-            {albums.map((elem,idx) => (
-                <p key={idx}>{`Element ${idx+1} : ${elem.artiste}`}</p>
-            ))}
-              </div>
-              );
-    }
-    else {
-
         const albums = await prisma.album.findMany();
-
         return (
             <div>
                 <h1 className="text-2xl mb-4">Albums</h1>
@@ -46,4 +47,4 @@ export default async function AlbumsPage() {
             </div>
         );
     }
-}
+

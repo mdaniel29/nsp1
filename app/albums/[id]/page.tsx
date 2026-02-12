@@ -5,8 +5,6 @@ import TracksList from "./TracksList"
 export default async function AlbumPage({ params }: { params: { id: string } }) {
     //const prisma= await getPrisma();
 
-
-
     const { id } = await params ?? 1;
     let album = { id: id, title: "titre_defaut", artiste: "artist_default", cover: "cover_default" }
     let safeAlbum = { ...album, id: Number(id) }; // conversion Bigint => int
