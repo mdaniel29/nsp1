@@ -3,6 +3,7 @@ import RenderImage from "./RenderImage";
 import prisma from "@/lib/prisma";
 import { Prisma } from "../generated/prisma/client";
 
+/*
 export async function getServerSideProps() {
   // En développement, retourne des données mockées
   if (process.env.NODE_ENV === 'development' && !process.env.CI) {
@@ -21,7 +22,7 @@ export async function getServerSideProps() {
     },
   };
 }
-
+*/
 export default async function AlbumsPage() {
 
     async function getImage(albumId: number): Promise<string> {
