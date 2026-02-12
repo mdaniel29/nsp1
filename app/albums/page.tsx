@@ -23,7 +23,7 @@ export default async function AlbumsPage() {
         return (
         <div>
             {albums.map((elem,idx) => (
-                <p>{`Element ${idx+1} : ${elem.artiste}`}</p>
+                <p key={idx}>{`Element ${idx+1} : ${elem.artiste}`}</p>
             ))}
               </div>
               );

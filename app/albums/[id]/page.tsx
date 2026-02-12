@@ -8,16 +8,18 @@ export default async function AlbumPage({ params }: { params: { id: string } }) 
 
 
     const { id } = await params ?? 1;
-    let album = { id: id, title: "titre_defaut", artiste: "artist_default", cover: "cover_default" }   
+    let album = { id: id, title: "titre_defaut", artiste: "artist_default", cover: "cover_default" }
     let safeAlbum = { ...album, id: Number(id) }; // conversion Bigint => int
-    
+
     // cas environnement de développement
     if (process.env.NODE_ENV === 'development' && !process.env.CI) {
         album = { id: '1', title: "titre1", artiste: "artist1", cover: "cover1" }
         safeAlbum = { ...album, id: Number(id) }; // conversion Bigint => int
-        return (<div>
-
-        </div>)
+        return (
+            <div>
+                <p>Album : {safeAlbum.id} {safeAlbum.title} - {safeAlbum.artiste}</p>
+            </div>
+        )
     }
     else { // production env.
 
