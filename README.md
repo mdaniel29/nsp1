@@ -25,7 +25,7 @@ ainsi que l'abandon des intéractions avec Supabase et le déploiement Vercel.
 **08/02/2026**
 ## En prévision :
 
-- déploiement sur un vps HostArmada
+- déploiement sur un vps
 - conteneurisation docker, accessible au travers d'un reverse-proxy
 - Rendre opérationnelle la fonction de recherche.
 - Implémentation des requêtes POST pour pouvoir ajouter de nouvelles données (Albums, pistes, images,...)
@@ -38,6 +38,6 @@ ainsi que l'abandon des intéractions avec Supabase et le déploiement Vercel.
 ## (docker / reverse proxy) :
 [nsp1.zetastart.link](https://nsp1.zetastart.link/)
 
-Les datas ont été restaurées à l'aide d'exports SQL (dbeaver), et insérés dans  
-une base postgres conteneurisée,à partir d'un volume partagé (réservé aux dumps)  
+Les datas ont été restaurées à l'aide d'exports SQL (dbeaver), et insérées dans  
+une base postgres conteneurisée, à partir d'un volume partagé (réservé aux dumps)  
 
