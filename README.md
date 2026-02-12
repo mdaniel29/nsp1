@@ -31,10 +31,11 @@ ainsi que l'abandon des intéractions avec Supabase et le déploiement Vercel.
 - Implémentation des requêtes POST pour pouvoir ajouter de nouvelles données (Albums, pistes, images,...)
 
 **11-02-2026**
-# DEV BRANCH
+### DEV BRANCH
 
 **12-02-26**
-# Projet déployé sur un VPS HostArmada (docker / reverse proxy) :
+# Projet déployé sur un VPS HostArmada
+## (docker / reverse proxy) :
 [nsp1.zetastart.link](https://nsp1.zetastart.link/)
 
 Les datas ont été restaurées à l'aide d'exports SQL (dbeaver), et insérés dans  
